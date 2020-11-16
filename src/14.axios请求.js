@@ -1,6 +1,6 @@
-import logo from './logo.svg';
+
 import React from 'react';
-import './App.css';
+import ReactDOM from 'react-dom';
 import axios from 'axios'
 
 // function App() {
@@ -30,9 +30,11 @@ class App extends React.Component{
       newDate:null
     }
   }
-  async componentWillUnmount(){
-    let res=await axios.get('http://localhost:8080');
-    console.log(res);
+  async UNSAFE_componentWillMount(){
+      console.log('111');
+    let res=await axios.get('http://localhost:8080/');
+    console.log(res.data.data.provinceCompare);
+    // console.log(JSON.parse(res.data));
   }
   render(){
     return(
@@ -44,4 +46,7 @@ class App extends React.Component{
   
 }
 
-export default App;
+ReactDOM.render(
+    <App></App>,
+    document.querySelector('#root')
+)
